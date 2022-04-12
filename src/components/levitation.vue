@@ -12,7 +12,7 @@
         ref="fu"
         class="float"
       >
-        <Icon name="money" />
+        <Icon name="add" class="icon" />
       </button>
     </router-link>
   </div>
@@ -98,14 +98,20 @@ export default {
 .float {
   position: absolute;
   right: 0;
-  top: 0;
+  top: 70%;
   touch-action: none;
   text-align: center;
   width: 60px;
-  height: 48px;
-  border-radius: 24px;
+  height: 60px;
+  border-radius: 100%;
   line-height: 48px;
   background: red;
+  border: none;
+}
+.icon {
+  height: 40px;
+  width: 40px;
   color: white;
+  margin-top: 10px;
 }
 </style>
