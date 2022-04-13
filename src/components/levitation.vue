@@ -106,7 +106,7 @@ export default {
   height: 60px;
   border-radius: 100%;
   line-height: 48px;
-  background: red;
+  background: $color-lightPurple;
   border: none;
 }
 .icon {

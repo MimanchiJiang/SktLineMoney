@@ -5,7 +5,7 @@
       :data-source="recordTypeList"
       :value.sync="type"
     />
-    <Levitation />
+
     <ol v-if="groupedList.length > 0">
       <li v-for="(group, index) in groupedList" :key="index">
         <h3 class="title">
@@ -187,6 +187,11 @@ export default class Statistics extends Vue {
 </script>
 
 <style scoped lang="scss">
+@import "~@/assets/style/helper.scss";
+li {
+  background: lighten($color-lightBlue, 10%);
+}
+
 .echarts {
   max-width: 100%;
   height: 400px;
@@ -197,7 +202,9 @@ export default class Statistics extends Vue {
 }
 ::v-deep {
   .type-tabs-item {
-    background: #c4c4c4;
+    background: $color-lightBlue;
+    border-radius: 10px;
+
     &.selected {
       background: white;
       &::after {

@@ -7,10 +7,6 @@
     />
     <Levitation />
     <nav>
-      <router-link to="/money" class="item" active-class="selected">
-        <Icon name="money" />
-        记账
-      </router-link>
       <div class="chart-wrapper" ref="chartWrapper">
         <Chart class="chart" :options="chartOptions" />
       </div>

@@ -56,6 +56,7 @@ $color-highlight: #f00;
 
 $color-lightBlue:rgb(204, 227, 232);
 $color-lightPurple:rgb(215, 221, 237);
+$color-lightBlue2:rgb(204, 227, 232, 0.5);
 
 %clearFix {
   &::after {
@@ -68,6 +69,7 @@ $color-lightPurple:rgb(215, 221, 237);
 $color-shadow: rgba(0, 0, 0, 0.25);
 
 
+
 %outerShadow {
   box-shadow: 0 0 3px $color-shadow;
 }
@@ -75,4 +77,9 @@ $color-shadow: rgba(0, 0, 0, 0.25);
 %innerShadow {
   box-shadow: inset 0 -3px 3px -3px $color-shadow,
     inset 0 3px 3px -3px $color-shadow;
+}
+
+%innerShadow2 {
+  box-shadow: inset 0 -3px 3px -3px $color-lightBlue,
+    inset 0 3px 3px -3px $color-lightBlue;
 }

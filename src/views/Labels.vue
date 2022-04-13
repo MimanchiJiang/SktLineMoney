@@ -7,6 +7,7 @@
         :key="tag.id"
         :to="`/labels/edit/${tag.id}`"
       >
+        <Icon name="clouds" />
         <span>{{ tag.name }}</span>
         <Icon name="right" />
       </router-link>
@@ -50,6 +51,7 @@ export default class Labels extends mixins(TagHelper) {
     align-items: center;
     justify-content: space-between;
     border-bottom: 1px solid #e6e6e6;
+    border-radius: 10px;
     svg {
       width: 18px;
       height: 18px;
