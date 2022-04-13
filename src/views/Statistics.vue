@@ -1,5 +1,10 @@
 <template >
   <Layout>
+    <Tabs
+      class-prefix="type"
+      :data-source="recordTypeList"
+      :value.sync="type"
+    />
     <Levitation />
     <ol v-if="groupedList.length > 0">
       <li v-for="(group, index) in groupedList" :key="index">
@@ -28,10 +33,9 @@ import clone from "@/lib/clone";
 import Chart from "@/components/Chart.vue";
 import _ from "lodash";
 import day from "dayjs";
-import Levitation from "@/components/levitation.vue";
 
 @Component({
-  components: { Tabs, Chart, Levitation },
+  components: { Tabs, Chart },
 })
 export default class Statistics extends Vue {
   tagString(tags: Tag[]) {

@@ -5,6 +5,7 @@
       :data-source="recordTypeList"
       :value.sync="type"
     />
+    <Levitation />
     <nav>
       <router-link to="/money" class="item" active-class="selected">
         <Icon name="money" />
@@ -114,7 +115,7 @@ export default class Statistics extends Vue {
           itemStyle: { borderWidth: 1, color: "#666", borderColor: "#666" },
           // lineStyle: {width: 10},
           data: values,
-          type: "bar",
+          type: "line",
         },
       ],
       tooltip: {

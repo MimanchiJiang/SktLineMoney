@@ -37,8 +37,8 @@ nav {
     align-items: center;
     flex-direction: column;
     .icon {
-      width: 32px;
-      height: 32px;
+      width: 25px;
+      height: 25px;
     }
   }
   > .item.selected {

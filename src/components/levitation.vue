@@ -94,7 +94,8 @@ export default {
   },
 };
 </script>
-<style  scoped>
+<style  scoped lang="scss">
+@import "~@/assets/style/helper.scss";
 .float {
   position: absolute;
   right: 0;
