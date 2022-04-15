@@ -10,6 +10,9 @@
       <div class="chart-wrapper" ref="chartWrapper">
         <Chart class="chart" :options="chartOptions" />
       </div>
+      <div class="chart-wrapper" ref="chartWrapper">
+        <Chart class="chart2" :options="chartOptions2" />
+      </div>
     </nav>
   </Layout>
 </template>
@@ -34,6 +37,7 @@ export default class Statistics extends Vue {
 
   mounted() {
     const div = this.$refs.chartWrapper as HTMLDivElement;
+    div.scrollLeft = div.scrollWidth;
   }
 
   beautify(string: string) {
@@ -88,6 +92,7 @@ export default class Statistics extends Vue {
       grid: {
         left: 0,
         right: 0,
+        bottom: 150,
       },
       xAxis: {
         type: "category",
@@ -112,6 +117,51 @@ export default class Statistics extends Vue {
           // lineStyle: {width: 10},
           data: values,
           type: "line",
+        },
+      ],
+      tooltip: {
+        show: true,
+        triggerOn: "click",
+        position: "top",
+        formatter: "{c}",
+      },
+    };
+  }
+  get chartOptions2() {
+    const keys = this.keyValueList.map((item) => item.key);
+    const values = this.keyValueList.map((item) => item.value);
+    console.log(values);
+    return {
+      grid: {
+        left: 0,
+        right: 0,
+        bottom: 0,
+        top: 0,
+      },
+      xAxis: {
+        type: "category",
+        data: keys,
+        axisTick: { alignWithLabel: true },
+        axisLine: { lineStyle: { color: "#666" } },
+        axisLabel: {
+          formatter: function (value: string, index: number) {
+            return value.substr(5);
+          },
+        },
+      },
+      yAxis: {
+        type: "value",
+        show: false,
+      },
+      series: [
+        {
+          name: "访问来源",
+          type: "pie", // 设置图表类型为饼图
+          radius: "50%", // 饼图的半径，外半径为可视区尺寸（容器高宽中较小一项）的 55% 长度。
+          data: [
+            // 数据数组，name 为数据项名称，value 为数据项值
+            { value: values, name: keys },
+          ],
         },
       ],
       tooltip: {
@@ -175,5 +225,18 @@ export default class Statistics extends Vue {
 }
 </script>
 
-<style>
+<style lang="scss">
+@import "~@/assets/style/helper.scss";
+
+.chart {
+  width: 430%;
+  &-wrapper {
+    overflow: auto;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}
+.chart2 {
+}
 </style>
