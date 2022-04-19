@@ -1,21 +1,24 @@
 <template>
-  <Layout>
+  <Layout class="layout">
     <Tabs
       class-prefix="type"
       :data-source="recordTypeList"
       :value.sync="type"
     />
-    <Levitation />
+    <router-link to="/Money">
+      <button class="float"><Icon name="add" class="icon" /></button
+    ></router-link>
     <nav>
-      <div class="chart-wrapper" ref="chartWrapper">
+      <div class="chart-wrapper" ref="chartWrapper" id="chart1">
         <Chart class="chart" :options="chartOptions" />
       </div>
-      <div class="chart-wrapper" ref="chartWrapper">
+      <div class="chart-wrapper2" ref="chartWrapper">
         <Chart class="chart2" :options="chartOptions2" />
       </div>
     </nav>
   </Layout>
 </template>
+
 
 <script lang="ts">
 import Vue from "vue";
@@ -24,7 +27,7 @@ import recordTypeList from "@/constants/recordTypeList";
 import dayjs from "dayjs";
 import clone from "@/lib/clone";
 import Chart from "@/components/Chart.vue";
-import _ from "lodash";
+import _, { sum } from "lodash";
 import day from "dayjs";
 import Tabs from "@/components/Tabs.vue";
 @Component({
@@ -36,8 +39,8 @@ export default class Statistics extends Vue {
   }
 
   mounted() {
-    const div = this.$refs.chartWrapper as HTMLDivElement;
-    div.scrollLeft = div.scrollWidth;
+    // const div = this.$refs.chartWrapper as HTMLDivElement;
+    // div.scrollLeft = div.scrollWidth;
   }
 
   beautify(string: string) {
@@ -46,7 +49,6 @@ export default class Statistics extends Vue {
     if (day.isSame(now, "day")) {
       return "今天";
     } else if (day.isSame(now.subtract(1, "day"), "day")) {
-      console.log("hi");
       return "昨天";
     } else if (day.isSame(now.subtract(2, "day"), "day")) {
       return "前天";
@@ -60,9 +62,7 @@ export default class Statistics extends Vue {
   get keyValueList() {
     const today = new Date();
     const array = [];
-    console.log(this.groupedList);
     for (let i = 0; i <= 29; i++) {
-      // this.recordList = [{date:7.3, value:100}, {date:7.2, value:200}]
       const dateString = day(today).subtract(i, "day").format("YYYY-MM-DD");
       const found = _.find(this.groupedList, {
         title: dateString,
@@ -87,7 +87,7 @@ export default class Statistics extends Vue {
   get chartOptions() {
     const keys = this.keyValueList.map((item) => item.key);
     const values = this.keyValueList.map((item) => item.value);
-    console.log(values);
+
     return {
       grid: {
         left: 0,
@@ -113,8 +113,8 @@ export default class Statistics extends Vue {
         {
           symbol: "circle",
           symbolSize: 12,
-          itemStyle: { borderWidth: 1, color: "#666", borderColor: "#666" },
-          // lineStyle: {width: 10},
+          itemStyle: { borderWidth: 1, color: "#d7dded" },
+          lineStyle: { color: "#cce3e8" },
           data: values,
           type: "line",
         },
@@ -127,10 +127,11 @@ export default class Statistics extends Vue {
       },
     };
   }
+
   get chartOptions2() {
     const keys = this.keyValueList.map((item) => item.key);
     const values = this.keyValueList.map((item) => item.value);
-    console.log(values);
+
     return {
       grid: {
         left: 0,
@@ -153,15 +154,28 @@ export default class Statistics extends Vue {
         type: "value",
         show: false,
       },
+      emphasis: {
+        label: {
+          show: true,
+
+          fontWeight: "bold",
+        },
+      },
+
       series: [
         {
-          name: "访问来源",
-          type: "pie", // 设置图表类型为饼图
-          radius: "50%", // 饼图的半径，外半径为可视区尺寸（容器高宽中较小一项）的 55% 长度。
-          data: [
-            // 数据数组，name 为数据项名称，value 为数据项值
-            { value: values, name: keys },
-          ],
+          radius: ["40%", "70%"],
+          name: "Access From",
+          itemStyle: {
+            borderRadius: 10,
+            borderColor: "#fff",
+            borderWidth: 2,
+          },
+          type: "pie",
+          data: this.groupedList.map((v) => ({
+            name: v.title,
+            value: v.total,
+          })),
         },
       ],
       tooltip: {
@@ -178,7 +192,6 @@ export default class Statistics extends Vue {
   }
 
   get groupedList() {
-    console.log("grouped list 被读取了");
     const { recordList } = this;
 
     const newList = clone(recordList)
@@ -225,10 +238,20 @@ export default class Statistics extends Vue {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import "~@/assets/style/helper.scss";
+.chart-wrapper {
+  height: 250px;
+}
+.chart-wrapper2 {
+  height: 200px;
+}
 
+.chart2 {
+  height: 200px;
+}
 .chart {
+  height: 250px;
   width: 430%;
   &-wrapper {
     overflow: auto;
@@ -237,6 +260,23 @@ export default class Statistics extends Vue {
     }
   }
 }
-.chart2 {
+.float {
+  position: absolute;
+  right: 0;
+  top: 80%;
+  touch-action: none;
+  text-align: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 100%;
+  line-height: 48px;
+  background: $color-lightPurple;
+  border: none;
+  > .icon {
+    height: 40px;
+    width: 40px;
+    color: white;
+    margin-top: 10px;
+  }
 }
 </style>

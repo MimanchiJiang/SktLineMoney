@@ -6,15 +6,17 @@
         v-for="tag in tags"
         :key="tag.id"
         :to="`/labels/edit/${tag.id}`"
-      >
-        <Icon name="clouds" />
-        <span>{{ tag.name }}</span>
+        ><div>
+          <Icon name="clouds" />
+          <span>{{ tag.name }}</span>
+        </div>
         <Icon name="right" />
       </router-link>
     </div>
     <div class="createTag-wrapper">
       <Button class="createTag" @click="createTag"> 新建标签 </Button>
     </div>
+    <Levitation />
   </Layout>
 </template>
 

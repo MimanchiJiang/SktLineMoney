@@ -1,5 +1,7 @@
 <template >
   <Layout>
+    <h1 class="title3">青云记账</h1>
+    <Levitation />
     <Tabs
       class-prefix="type"
       :data-source="recordTypeList"
@@ -9,7 +11,8 @@
     <ol v-if="groupedList.length > 0">
       <li v-for="(group, index) in groupedList" :key="index">
         <h3 class="title">
-          {{ beautify(group.title) }} <span>￥{{ group.total }}</span>
+          <div><icon name="clouds" /> {{ beautify(group.title) }}</div>
+          <span>￥{{ group.total }}</span>
         </h3>
         <ol>
           <li v-for="item in group.items" :key="item.id" class="record">
@@ -223,6 +226,16 @@ li {
   justify-content: space-between;
   align-content: center;
 }
+.title3 {
+  color: black;
+  background-color: black;
+  text-shadow: rgba(255, 255, 255, 0.5) 0 5px 6px,
+    rgba(255, 255, 255, 0.2) 1px 3px 3px;
+  -webkit-background-clip: text;
+  text-align: center;
+  background: $color-lightBlue;
+}
+
 .title {
   @extend %item;
 }

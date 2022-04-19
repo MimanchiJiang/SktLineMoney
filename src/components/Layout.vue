@@ -1,6 +1,5 @@
 <template>
   <div class="layout-wrapper" :class="classPrefix && `${classPrefix}-wrapper`">
-    <Levitation />
     <div class="content" :class="classPrefix && `${classPrefix}-content`">
       <slot />
     </div>
