@@ -111,9 +111,12 @@ export default class Statistics extends Vue {
       },
       series: [
         {
+          color: "#cce3e8",
           symbol: "circle",
           symbolSize: 12,
-          itemStyle: { borderWidth: 1, color: "#d7dded" },
+          itemStyle: {
+            normal: { label: { show: true, color: "#cce3e8" } },
+          },
           lineStyle: { color: "#cce3e8" },
           data: values,
           type: "line",
@@ -130,7 +133,6 @@ export default class Statistics extends Vue {
 
   get chartOptions2() {
     const keys = this.keyValueList.map((item) => item.key);
-    const values = this.keyValueList.map((item) => item.value);
 
     return {
       grid: {
@@ -172,8 +174,8 @@ export default class Statistics extends Vue {
             borderWidth: 2,
           },
           type: "pie",
-          data: this.groupedList.map((v) => ({
-            name: v.title,
+          data: this.tagGroupedList.map((v) => ({
+            name: v.tag.name,
             value: v.total,
           })),
         },
@@ -185,6 +187,32 @@ export default class Statistics extends Vue {
         formatter: "{c}",
       },
     };
+  }
+  get tagGroupedList() {
+    const { recordList } = this;
+    const newList = clone(recordList).filter((r) => r.type === this.type);
+    // 先筛选出记录中的所有tag并去重
+    const allTags = newList
+      .map((r) => r.tags)
+      .filter((t) => t !== null)
+      .reduce((sum, current) => [...sum, ...current], []);
+    const uniqTags = _.uniqBy(allTags, "id");
+    // 再以tag为基准，对收支记录进行分组；即我们需要知道：某个tag，它对应有哪些收支记录
+    const groupedList = uniqTags.map((tag) => {
+      const tagRecords = newList.filter((r) =>
+        r.tags.find((t) => t.id === tag.id)
+      );
+      const total = tagRecords.reduce((sum, item) => {
+        return sum + item.amount;
+      }, 0);
+      return {
+        tag,
+        total,
+        records: tagRecords,
+      };
+    });
+    // 返回我们已经分好组的数组，再在chartOptions中适当调整后使用即可
+    return groupedList;
   }
 
   get recordList() {

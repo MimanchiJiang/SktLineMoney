@@ -2,7 +2,7 @@ const path = require('path')
 
 module.exports = {
   publicPath: process.env.NODE_ENV === 'production'
-    ? '/SkyLineWebsite/'
+    ? '/SkyLineWebsite/'//这里写展示页面的仓库名称
     : '/',
   lintOnSave: false,
   chainWebpack: config => {

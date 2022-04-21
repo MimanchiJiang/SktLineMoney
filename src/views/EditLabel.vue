@@ -14,7 +14,6 @@
       />
     </div>
     <div class="button-wrapper">
-      <Button @click="remove">确认</Button>
       <Button @click="remove" class="remove">删除</Button>
     </div>
     <Levitation />
