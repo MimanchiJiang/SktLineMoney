@@ -8,6 +8,7 @@ import EditLabel from '@/views/EditLabel.vue';
 import { Component } from 'vue-property-decorator';
 import Chart from '../components/Chart.vue';
 import viewChart from "@/views/viewChart.vue"
+import User from "@/views/vues.vue"
 
 Vue.use(VueRouter);
 
@@ -31,6 +32,10 @@ const routes = [
   {
     path: '/statistics',
     component: Statistics
+  },
+  {
+    path: '/user/:id',
+    component: User
   },
   {
     path: '/labels/edit/:id',

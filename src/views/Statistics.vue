@@ -12,7 +12,7 @@
       <li v-for="(group, index) in groupedList" :key="index">
         <h3 class="title">
           <div><icon name="clouds" /> {{ beautify(group.title) }}</div>
-          <span>￥{{ group.total }}</span>
+          <span>￥{{ group.total.toFixed(1) }}</span>
         </h3>
         <ol>
           <li v-for="item in group.items" :key="item.id" class="record">
