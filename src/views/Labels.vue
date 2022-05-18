@@ -1,5 +1,6 @@
 <template>
   <Layout>
+    <h1 class="title3">青云记账</h1>
     <div class="tags">
       <router-link
         class="tag"
@@ -43,6 +44,15 @@ export default class Labels extends mixins(TagHelper) {
 
 <style lang="scss" scoped>
 @import "~@/assets/style/helper.scss";
+.title3 {
+  color: black;
+  background-color: black;
+  text-shadow: rgba(255, 255, 255, 0.5) 0 5px 6px,
+    rgba(255, 255, 255, 0.2) 1px 3px 3px;
+  -webkit-background-clip: text;
+  text-align: center;
+  background: rgb(189, 211, 215);
+}
 .tags {
   background: white;
   font-size: 16px;

@@ -3,6 +3,7 @@
 # 当发生错误时中止脚本
 set -e
 
+rm -rf dist
 # 构建
 yarn build
 

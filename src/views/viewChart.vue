@@ -1,5 +1,6 @@
 <template>
   <Layout class="layout">
+    <h1 class="title3">青云记账</h1>
     <Tabs
       class-prefix="type"
       :data-source="recordTypeList"
@@ -268,6 +269,15 @@ export default class Statistics extends Vue {
 
 <style lang="scss" scoped>
 @import "~@/assets/style/helper.scss";
+.title3 {
+  color: black;
+  background-color: black;
+  text-shadow: rgba(255, 255, 255, 0.5) 0 5px 6px,
+    rgba(255, 255, 255, 0.2) 1px 3px 3px;
+  -webkit-background-clip: text;
+  text-align: center;
+  background: rgb(189, 211, 215);
+}
 .chart-wrapper {
   height: 250px;
 }

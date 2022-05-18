@@ -233,7 +233,7 @@ li {
     rgba(255, 255, 255, 0.2) 1px 3px 3px;
   -webkit-background-clip: text;
   text-align: center;
-  background: $color-lightBlue;
+  background: rgb(189, 211, 215);
 }
 
 .title {
