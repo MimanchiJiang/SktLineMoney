@@ -13,7 +13,7 @@
       <div class="chart-wrapper" ref="chartWrapper" id="chart1">
         <Chart class="chart" :options="chartOptions" />
       </div>
-      <div class="chart-wrapper2" ref="chartWrapper">
+      <div class="chart-wrapper2" ref="chartWrapper2">
         <Chart class="chart2" :options="chartOptions2" />
       </div>
     </nav>
@@ -40,6 +40,7 @@ export default class Statistics extends Vue {
   }
 
   mounted() {
+    (this.$refs.chartWrapper as HTMLDivElement).scrollLeft = 9999;
     // const div = this.$refs.chartWrapper as HTMLDivElement;
     // div.scrollLeft = div.scrollWidth;
   }

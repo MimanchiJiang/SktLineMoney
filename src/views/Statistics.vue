@@ -45,11 +45,6 @@ export default class Statistics extends Vue {
     return tags.length === 0 ? "无" : tags.map((t) => t.name).join("，");
   }
 
-  mounted() {
-    const div = this.$refs.chartWrapper as HTMLDivElement;
-    div.scrollLeft = div.scrollWidth;
-  }
-
   beautify(string: string) {
     const day = dayjs(string);
     const now = dayjs();
