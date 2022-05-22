@@ -62,10 +62,14 @@ export default class NumberPad extends Vue {
   }
 
   ok() {
-    const number = parseFloat(this.output);
-    this.$emit("update:value", number);
-    this.$emit("submit", number);
-    this.output = "0";
+    let number = parseFloat(this.output);
+    if (number == 0) {
+      window.alert("输入的金额为0");
+    } else {
+      this.$emit("update:value", number);
+      this.$emit("submit", number);
+      this.output = "0";
+    }
   }
 }
 </script>
